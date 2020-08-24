@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-    public function answers(){
-        return $this->hasMany(Anwser::class);
+    public function qa_sessions(){
+        return $this->hasMany(QA_session::class);
     }
 }

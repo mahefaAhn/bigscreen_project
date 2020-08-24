@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterQuestionsTable extends Migration
+class AlterQaSessionsPublicUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AlterQuestionsTable extends Migration
      */
     public function up()
     {
-        Schema::table('questions', function (Blueprint $table) {
-            $table->foreignId('admin_id')
+        Schema::table('qa_sessions', function (Blueprint $table) {
+            $table->foreignId('public_user_id')
                 ->constrained()
                 ->onDelete('CASCADE');
         });
@@ -27,12 +27,12 @@ class AlterQuestionsTable extends Migration
      */
     public function down()
     {
-        Schema::table('questions', function (Blueprint $table) {
+        Schema::table('qa_sessions', function (Blueprint $table) {
             //Supprimer la contrainte
-            $table->dropForeign('questions_admin_id_foreign');
+            $table->dropForeign('qa_sessions_public_user_id_foreign');
 
             // Supprimer la colonne
-            $table->dropColumn('public_admin_id');
+            $table->dropColumn('public_user_id');
         });
     }
 }
