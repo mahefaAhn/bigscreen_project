@@ -1,0 +1,25 @@
+.thanksContainer{
+    background-image        : url("../../Assets/img/background.jpg");
+    -webkit-background-size : cover;
+    -moz-background-size    : cover;
+    -o-background-size      : cover;
+    background-size         : cover;
+}
+
+.bodyThanksContainer{
+    height      : 70vh;
+    color       : white;
+    position    : relative;
+}
+
+.bodyThanks{
+    margin          : 0;
+    position        : absolute;
+    top             : 50%;
+    -ms-transform   : translateY(-50%);
+    transform       : translateY(-50%);
+}
+
+.thanksSentence{
+    font-size       : 15pt;
+}

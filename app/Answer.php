@@ -6,7 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Answer extends Model
 {
-    public function qa_sessions(){
-        return $this->hasMany(QA_session::class);
+    protected $fillable = [
+        'content'
+    ];
+    
+    //Questions
+    public function questions(){
+        return $this->belongsTo(Question::class);
+    }
+
+    //Users
+    public function users(){
+        return $this->belongsTo(User::class);
     }
 }

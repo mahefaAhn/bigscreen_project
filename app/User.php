@@ -9,6 +9,11 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
+    
+    // Answers
+    public function answers(){
+        return $this->hasMany(Answer::class);
+    }
 
     /**
      * The attributes that are mass assignable.

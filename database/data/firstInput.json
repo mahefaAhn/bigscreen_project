@@ -1,0 +1,212 @@
+[
+    {
+        "title"     : "Votre adresse mail",
+        "category"  : "B",
+        "input_type": "text",
+        "answers"   : null
+    },
+    {
+        "title"     : "Votre âge",
+        "category"  : "B",
+        "input_type": "text",
+        "answers"   : [
+            "Oui",
+            "Non"
+        ]
+    },
+    {
+        "title"     : "Votre sexe",
+        "category"  : "A",
+        "input_type": "textSelect",
+        "answers"   : [
+            "Homme",
+            "Femme",
+            "Préfère ne pas répondre"
+        ]
+    },
+    {
+        "title"     : "Nombre de personne dans votre foyer (adulte & enfants)",
+        "category"  : "C",
+        "input_type": "numberSelect",
+        "answers"   : [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+        ]
+    },
+    {
+        "title"     : "Votre profession",
+        "category"  : "B",
+        "input_type": "text",
+        "answers"   : null
+    },
+    {
+        "title"     : "Quel marque de casque VR utilisez vous ?",
+        "category"  : "A",
+        "input_type": "textSelect",
+        "answers"   : [
+            "Occulus Rifts/s",
+            "HTC Vive",
+            "Windows Mixed Reality",
+            "PSVR"
+        ]
+    },
+    {
+        "title"     : "Sur quel magasin d’application achetez vous des contenus VR ?",
+        "category"  : "A",
+        "input_type": "textSelect",
+        "answers"   : [
+            "SteamVR",
+            "Occulus store",
+            "Playstation VR",
+            "Google Play",
+            "Windows store"
+        ]
+    },
+    {
+        "title"     : "Quel casque envisagez vous d’acheter dans un futur proche ?",
+        "category"  : "A",
+        "input_type": "textSelect",
+        "answers"   : [
+            "SteamVR",
+            "Occulus Quest",
+            "Occulus Go",
+            "HTC Vive Pro",
+            "Autre",
+            "Aucun"
+        ]
+    },
+    {
+        "title"     : "Au sein de votre foyer, combien de personne utilisent votre casque VR pour regarder Bigscreen?",
+        "category"  : "C",
+        "input_type": "numberSelect",
+        "answers"   : [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+        ]
+    },
+    {
+        "title"     : "Vous utilisez principalement Bigscreen pour :",
+        "category"  : "A",
+        "input_type": "textSelect",
+        "answers"   : [
+            "regarder des émissions TV en direct",
+            "regarder des films",
+            "jouer en solo",
+            "jouer en team"
+        ]
+    },
+    {
+        "title"     : "Combien donnez vous de point pour la qualité de l’image sur Bigscreen ?",
+        "category"  : "C",
+        "input_type": "numberSelect",
+        "answers"   : [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+        ]
+    },
+    {
+        "title"     : "Combien donnez vous de point pour le confort d’utilisation de l’interface Bigscreen ?",
+        "category"  : "C",
+        "input_type": "numberSelect",
+        "answers"   : [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+        ]
+    },
+    {
+        "title"     : "Combien donnez vous de point pour la connection réseau de Bigscreen ?",
+        "category"  : "C",
+        "input_type": "numberSelect",
+        "answers"   : [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+        ]
+    },
+    {
+        "title"     : "Combien donnez vous de point pour la qualité des graphismes 3D dans Bigscreen ?",
+        "category"  : "C",
+        "input_type": "numberSelect",
+        "answers"   : [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+        ]
+    },
+    {
+        "title"     : "Combien donnez vous de point pour la qualité audio dans Bigscreen ?",
+        "category"  : "C",
+        "input_type": "numberSelect",
+        "answers"   : [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+        ]
+    },
+    {
+        "title"     : "Aimeriez vous avoir des notifications plus précises au cours de vos sessions Bigscreen ?",
+        "category"  : "A",
+        "input_type": "textSelect",
+        "answers"   : [
+            "Oui",
+            "Non"
+        ]
+    },
+    {
+        "title"     : "Aimeriez vous pouvoir inviter un ami à rejoindre votre session via son smartphone ?",
+        "category"  : "A",
+        "input_type": "textSelect",
+        "answers"   : [
+            "Oui",
+            "Non"
+        ]
+    },
+    {
+        "title"     : "Aimeriez vous pouvoir enregistrer des émissions TV pour pouvoir les regarder ultérieurement ?",
+        "category"  : "C",
+        "input_type": "numberSelect",
+        "answers"   : [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+        ]
+    },
+    {
+        "title"     : "Aimeriez vous jouer à des jeux exclusifs sur votre Bigscreen ?",
+        "category"  : "C",
+        "input_type": "numberSelect",
+        "answers"   : [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+        ]
+    },
+    {
+        "title"     : "Quelle nouvelle fonctionnalité de vos rêve devrait exister sur Bigscreen ?",
+        "category"  : "B",
+        "input_type": "textarea",
+        "answers"   : null
+    }
+]

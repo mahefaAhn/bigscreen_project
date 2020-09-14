@@ -1,0 +1,13 @@
+.bsFooter{
+    background-color: black;
+    border-top      : solid #333230;
+    padding-top     : 20px ;
+    padding-bottom  : 20px ;
+}
+
+.bsIconFooter{
+    margin-right    : 10px ;
+}
+.bsLogoSmall{
+    width           : 10%;
+}

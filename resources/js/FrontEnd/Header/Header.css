@@ -1,0 +1,14 @@
+.bsHeader{
+    background-color: black;
+    border-bottom   : solid #333230;
+    padding         : 20px ;
+}
+
+/* Logo in Medium format */
+.bsLogoMedium{
+    width           : 25%;
+}
+/* Logo in Small Format */
+.bsLogoSmall{
+    width           : 10%;
+}

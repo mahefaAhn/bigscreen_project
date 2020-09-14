@@ -1,0 +1,14 @@
+html {
+    font-family : 'GT-Walsheim-Pro-Bigscreen',sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    background-color    : black;
+    font-family : 'GT-Walsheim-Pro-Bigscreen',sans-serif;
+}
+
+.pdtop50{
+    padding-top         : 50px ;
+}

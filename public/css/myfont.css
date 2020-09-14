@@ -1,0 +1,36 @@
+  @font-face {
+    font-family: "GT-Walsheim-Pro-Bigscreen";
+    font-weight: 200;
+    src: url(/fonts/GT-Walsheim-Pro-Thin.eot);
+    src: url(/fonts/GT-Walsheim-Pro-Thin.eot?#iefix) format("embedded-opentype"), url(/fonts/GT-Walsheim-Pro-Thin.woff) format("woff");
+  }
+  @font-face {
+    font-family: "GT-Walsheim-Pro-Bigscreen";
+    font-weight: 300;
+    src: url(/fonts/GT-Walsheim-Pro-Light.eot);
+    src: url(/fonts/GT-Walsheim-Pro-Light.eot?#iefix) format("embedded-opentype"), url(/fonts/GT-Walsheim-Pro-Light.woff) format("woff");
+  }
+  @font-face {
+    font-family: "GT-Walsheim-Pro-Bigscreen";
+    font-weight: 400;
+    src: url(/fonts/GT-Walsheim-Pro-Regular.eot);
+    src: url(/fonts/GT-Walsheim-Pro-Regular.eot?#iefix) format("embedded-opentype"), url(/fonts/GT-Walsheim-Pro-Regular.woff) format("woff");
+  }
+  @font-face {
+    font-family: "GT-Walsheim-Pro-Bigscreen";
+    font-weight: 500;
+    src: url(/fonts/GT-Walsheim-Pro-Medium.eot);
+    src: url(/fonts/GT-Walsheim-Pro-Medium.eot?#iefix) format("embedded-opentype"), url(/fonts/GT-Walsheim-Pro-Medium.woff) format("woff");
+  }
+  @font-face {
+    font-family: "GT-Walsheim-Pro-Bigscreen";
+    font-weight: 600;
+    src: url(/fonts/GTWalsheimProBold.eot);
+    src: url(/fonts/GTWalsheimProBold.eot?#iefix) format("embedded-opentype"), url(/fonts/GTWalsheimProBold.woff) format("woff");
+  }
+  @font-face {
+    font-family: "GT-Walsheim-Pro-Bigscreen";
+    font-weight: 900;
+    src: url(/fonts/GT-Walsheim-Pro-Ultra-Bold.eot);
+    src: url(/fonts/GT-Walsheim-Pro-Ultra-Bold.eot?#iefix) format("embedded-opentype"), url(/fonts/GT-Walsheim-Pro-Ultra-Bold.woff2) format("woff2"), url(/fonts/GT-Walsheim-Pro-Ultra-Bold.woff) format("woff");
+  }
