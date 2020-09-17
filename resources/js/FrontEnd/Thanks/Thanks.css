@@ -23,3 +23,12 @@
 .thanksSentence{
     font-size       : 15pt;
 }
+
+.linkCompleted{
+    text-decoration : none ;
+    color           : white ;
+}
+.linkCompleted:hover{
+    text-decoration : none ;
+    color           : white ;
+}

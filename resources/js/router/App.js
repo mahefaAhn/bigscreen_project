@@ -21,6 +21,7 @@ import Home         from '../BackEnd/Home/Home';
 import Question     from '../BackEnd/Question/Question';
 import Responses    from '../BackEnd/Responses/Responses';
 import Login        from '../BackEnd/Login/Login';
+import LogOut       from '../BackEnd/LogOut/LogOut';
 
 // Standard
 import NotFoundPage from '../Standard/NotFoundPage/NotFoundPage';
@@ -35,22 +36,18 @@ const App = () => {
             <Switch>
                 {/* FRONT OFFICE */}
                 <Route exact path="/" component={Form} />
-                <Route exact path="/response" component={Response} />
-                <Route path="/thankyou" component={Thanks} />
+                <Route exact path="/response/:uri" component={Response} />
+                <Route exact path="/answer/:uri" component={Thanks}/>
                 {/* BACK OFFICE */}
                 <Route exact path="/login" component={Login} />
 
-                <ProtectedRoute pathName="/administration" loggedIn={loggedIn} componentName={Home}/>
-                <ProtectedRoute pathName="/responses" loggedIn={loggedIn} componentName={Responses}/>
-                <ProtectedRoute pathName="/question" loggedIn={loggedIn} componentName={Question}/>
-                
-                {/* 
-                <Route exact path="/administration" component={Home} />
-                <Route exact path="/responses" component={Responses} />
-                <Route exact path="/question" component={Question} />
-                */}
+                <ProtectedRoute path="/administration" auth={loggedIn} component={Home}/>
+                <ProtectedRoute path="/responses" auth={loggedIn} component={Responses}/>
+                <ProtectedRoute path="/question" auth={loggedIn} component={Question}/>
+                <ProtectedRoute path="/logOut" auth={loggedIn} component={LogOut}/>
                 
                 {/* 404 ERROR */}
+                <Route exact path="/404" component={NotFoundPage} />
                 <Route component={NotFoundPage} />
             </Switch>
             </div>

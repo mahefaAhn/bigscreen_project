@@ -91,8 +91,7 @@ const Form = (props) => {
         axios.post(url_post_insert_data, resultUser)
         .then(function (response) {
             localStorage.setItem('token', token);
-            alertUser(response.data);
-            //history.push('/home');
+            props.history.push('/answer/'+response.dataRet);
         })
         .catch(function (error) {
             console.log(error);

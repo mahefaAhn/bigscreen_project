@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Login.css'
 import LogoLight from '../../Assets/img/logo.png';
+// CSS
+import '../../CommonCSS/style.css'
+import './Login.css'
 
 const Login = (props) => {
     const urlAuthentication                         = '/authentication';
@@ -11,14 +13,13 @@ const Login = (props) => {
     const [errorLoggin, setErrorLogin]              = useState(null);
     const [buttonLoginStatus, setButtonLoginStatus] = useState('disabled');
 
-    useEffect(() => {
-        // Redirect to 'administration' if user is already logged in
-        const auth_token        = localStorage.getItem('token');
-        const auth_userLogged   = localStorage.getItem('userLogged');
-        if(auth_token && auth_userLogged) props.history.push('/administration');
-    });
+    // Redirect to 'administration' if user is already logged in
+    const auth_token        = localStorage.getItem('token');
+    const auth_userLogged   = localStorage.getItem('userLogged');
+    if(auth_token && auth_userLogged) props.history.push('/administration');
 
     const handleChange = (event) => {
+        setErrorLogin(null);
         const formData                 = {...userAuth};
         formData[event.target.name]    = event.target.value;
         setUserAuth(formData);
@@ -52,23 +53,29 @@ const Login = (props) => {
             },
         };
 
-        axios.post(urlAuthentication, userAuth)
-        .then(function (response) {
-            const resultAuth    = response.data;
-            if(resultAuth.resultFound==1){
-                localStorage.setItem('token', token);
-                localStorage.setItem('userLogged', resultAuth.userFound);
-                console.log("Utilisateur connecté, token :"+localStorage.getItem('token'));
-                console.log(localStorage.getItem('userLogged'));
-                setErrorLogin(null);
-                props.history.push('/administration');
-            }else{
-                setErrorLogin("Identifiant ou mot de passe incorrect.");
-            }
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+        const email         =  document.querySelector('#email').value;
+        const password      =  document.querySelector('#password').value;
+        if(email=='' && password==''){
+            setErrorLogin("Veuillez renseigner l'adresse email et le mot de passe.");
+        }
+        else{
+            setErrorLogin(null);
+            axios.post(urlAuthentication, userAuth)
+            .then(function (response) {
+                const resultAuth    = response.data;
+                if(resultAuth.resultFound==1){
+                    localStorage.setItem('token', token);
+                    localStorage.setItem('userLogged', resultAuth.userFound);
+                    setErrorLogin(null);
+                    props.history.replace('/administration');
+                }else{
+                    setErrorLogin("Identifiant ou mot de passe incorrect.");
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        }
     }
 
     return (

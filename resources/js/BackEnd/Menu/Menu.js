@@ -2,58 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 /* CSS */
 import './Menu.css';
+import LogoLight from '../../Assets/img/logo.png';
 
 const Menu = (props) => {
-    const prod_url = 'https://localhost:3000/';
-    const uniqLink = '';
     return (
-        <div className="menuContainer">
-            <nav id="sidebar">
-                <div className="sidebar-header">
-                    <h3>Bootstrap Sidebar</h3>
-                </div>
-
-                <ul className="list-unstyled components">
-                    <p>Dummy Heading</p>
-                    <li className="active">
-                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Home</a>
-                        <ul className="collapse list-unstyled" id="homeSubmenu">
-                            <li>
-                                <a href="#">Home 1</a>
-                            </li>
-                            <li>
-                                <a href="#">Home 2</a>
-                            </li>
-                            <li>
-                                <a href="#">Home 3</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Pages</a>
-                        <ul className="collapse list-unstyled" id="pageSubmenu">
-                            <li>
-                                <a href="#">Page 1</a>
-                            </li>
-                            <li>
-                                <a href="#">Page 2</a>
-                            </li>
-                            <li>
-                                <a href="#">Page 3</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">Portfolio</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-            </nav>
+        <div className="menuGroup">
+            <ul className="userMenuList">
+                <li><img src={LogoLight} className="admin_imgLogo"/></li>
+                <li><Link className="menuTitle" to={'/administration'}>Accueil</Link></li>
+                <li><Link className="menuTitle"to={'/question'}>Questionnaire</Link></li>
+                <li><Link className="menuTitle"to={'/responses'}>Réponses</Link></li>
+                <li><Link className="menuTitle"to={'/logOut'}><button className="btn btn-outline-light">Se déconnecter</button></Link></li>
+            </ul>
         </div>
     );
 }

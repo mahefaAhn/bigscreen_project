@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios    from 'axios';
 import Menu     from '../Menu/Menu';
+
 /* CSS */
+import '../../CommonCSS/style.css';
 import './Question.css';
 
 const Question = (props) => {
@@ -17,21 +19,13 @@ const Question = (props) => {
     }, [])
 
     return (
-        <div className="wrapper">
-            <Menu/>
-            <div id="content">
-                <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                    <div className="container-fluid">
-
-                        <button type="button" id="sidebarCollapse" className="btn btn-info">
-                            <i className="fas fa-align-left"></i>
-                            <span>Toggle Sidebar</span>
-                        </button>
-
-                    </div>
-                </nav>
-                <div className="">
-                    <h2>Liste des questions</h2>
+        <div className="generalContainer">
+            <div className="row">
+                <div className="col-md-2 menuContainer">
+                    <Menu/>
+                </div>
+                <div className="col-md-10 pageContainer">
+                    <h2 className="bsTitleH2">Liste des questions</h2>
                     <table className="table table-dark responsive">
                         <thead>
                             <tr>

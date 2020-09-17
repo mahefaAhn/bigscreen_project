@@ -1,3 +1,27 @@
-html,body{
-    background-color: white;
+.graphContainer{
+    margin : 0;
+}
+
+@media (min-width: 300px) {
+    .chartTitle{
+        font-size           : 11pt;
+    }
+}
+
+@media (min-width: 768px) {
+    .chartTitle{
+        font-size           : 12pt;
+    }
+}
+
+@media (min-width: 992px) {
+    .chartTitle{
+        font-size           : 12pt;
+    }
+}
+
+@media (min-width: 1200px) {
+    .chartTitle{
+        font-size           : 12pt;
+    }
 }

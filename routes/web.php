@@ -36,15 +36,13 @@ Route::get('admin', 'BackController@index')->name('admin');
 Route::get('admin/login', 'BackController@login')->name('adminLogin');
 Route::get('admin/questions', 'BackController@questionList')->name('questions');
 Route::get('admin/answers', 'BackController@answerList')->name('answers');
-Route::get('admin/pieChartData', 'APIController@getPieChartData')->name('pieChartData');
-Route::get('admin/radarChartData', 'APIController@getRadarChartData')->name('radarChartData');
 Route::get('userWhoAnswered', 'APIController@getUserWhoAnswered')->name('userWhoAnswered');
+Route::post('admin/chartData', 'APIController@getChartData')->name('chartData');
 
 // Authentication
 Route::post('authentication', 'APIController@checkAuthentication')->name('authentication');
 
 Route::post('saveForm', 'APIController@saveForm');
 
-//Route::view('/{path?}', 'app')->where('path', '.');
-Route::view('/{path?}', 'app');
+Route::view('/{path?}', 'app')->where('path', '.*');
 Auth::routes();

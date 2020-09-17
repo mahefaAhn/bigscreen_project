@@ -37,145 +37,6 @@ class APIController extends Controller
         return $this->showResultPretty($array);
     }
 
-    // Function to get pie chart data
-    public function getPieChartData(){
-        $idQuestionList = [6,7,10];
-        $returnData     = [];
-        /*
-        Model
-        const data               = [
-            labels: [
-                'Red',
-                'Blue',
-                'Yellow'
-            ],
-            datasets: [{
-                data: [300, 50, 100],
-                backgroundColor: [
-                '#FF6384',
-                '#36A2EB',
-                '#FFCE56'
-                ],
-                hoverBackgroundColor: [
-                '#FF6384',
-                '#36A2EB',
-                '#FFCE56'
-                ]
-            }]
-        ];
-        */
-        // Get title of question
-        $questionData                       = [];
-        foreach($idQuestionList as $idQuestion){
-            $questionInfo                   = Question::with(['types','options'])->where('id', $idQuestion)->get()->toArray();
-            $questionData_elt               = [];
-            foreach($questionInfo as $thisQuestion){
-                // Reinit color 
-                $colorPicker    = ['#003049','#d62828','#f77f00','#fcbf49','#eae2b7','#006d77','#ffb5a7','#78290f','#001f54'];
-                // Push title and id
-                $questionData_elt['title']              = $thisQuestion['title'];
-                $questionData_elt['id']                 = $idQuestion;
-                $questionData_elt['data']               = [];
-                /* Labels */
-                $questionData_elt['data']['labels']     = [];
-                /* Datasets */
-                $questionData_elt['data']['datasets']   = [];
-                $datasetsArray                          = [];
-                $datasetsArray['data']                  = [];
-                $datasetsArray['backgroundColor']       = [];
-                $datasetsArray['hoverBackgroundColor']  = [];
-                // Get options
-                $temp_choice                = json_decode ($thisQuestion['options']['content']);
-                foreach($temp_choice as $choice){
-                    // Get count of each option by idQuestion
-                    $temp                   = Answer::with(['questions'])->where([['content',$choice],['questions_id',$idQuestion]])->count();
-                    // Choose color in array
-                    $tempColor      = $colorPicker[rand(0,(sizeof($colorPicker)-1))];
-                    // Delete color from colorPicker
-                    $colorPicker =  array_values(array_diff( $colorPicker, array($tempColor) ));
-                    // Push all data in final result
-                    array_push($questionData_elt['data']['labels'], $choice);
-                    array_push($datasetsArray['data'] , $temp);
-                    array_push($datasetsArray['backgroundColor'] , $tempColor);
-                    array_push($datasetsArray['hoverBackgroundColor'] , $tempColor);
-                }
-                array_push($questionData_elt['data']['datasets'] , $datasetsArray);
-            }
-            array_push($questionData, $questionData_elt);
-        }
-        return $this->showResultPretty($questionData);
-    }
-
-    // Function to get radar chart data
-    public function getRadarChartData(){
-        $idQuestionList = [11,12,13,14,15];
-        /*
-        Model
-        const data               = [
-            labels: [
-                'Red',
-                'Blue',
-                'Yellow'
-            ],
-            datasets: [{
-                label: 'My First dataset',
-                data: [65, 59, 90, 81, 56, 55, 40],
-                backgroundColor: 'rgba(179,181,198,0.2)',
-                borderColor: 'rgba(179,181,198,1)',
-                pointBackgroundColor: 'rgba(179,181,198,1)',
-                pointHoverBorderColor: 'rgba(179,181,198,1)',
-                pointBorderColor: '#fff',
-                pointHoverBackgroundColor: '#fff',
-            }]
-        ];
-        */
-        // Get title of question
-        $questionData                       = [];
-        foreach($idQuestionList as $idQuestion){
-            $questionInfo                       = Question::with(['types','options'])->where('id', $idQuestion)->get()->toArray();
-            $questionData_elt                   = [];
-            $colorPicker                        = ['#003049','#d62828','#f77f00','#fcbf49','#eae2b7','#006d77','#ffb5a7','#78290f','#001f54'];
-            foreach($questionInfo as $thisQuestion){
-                // Push title and id
-                $questionData_elt['title']                  = $thisQuestion['title'];
-                $questionData_elt['id']                     = $idQuestion;
-                $questionData_elt['data']                   = [];
-                /* Labels */
-                $questionData_elt['data']['labels']         = [];
-                /* Datasets */
-                $questionData_elt['data']['datasets']       = [];
-                $datasetsArray                              = [];
-                $datasetsArray['data']                      = [];
-                // Get options
-                $temp_choice                = json_decode ($thisQuestion['options']['content']);
-                // Color
-                $bgColor                                    = '';
-                $ptColor                                    = '#fff';
-                foreach($temp_choice as $choice){
-                    // Get count of each option by idQuestion
-                    $temp                   = Answer::with(['questions'])->where([['content',$choice],['questions_id',$idQuestion]])->count();
-                    // Choose color in array
-                    $bgColor                = $colorPicker[rand(0,(sizeof($colorPicker)-1))];
-                    // Delete color from colorPicker
-                    $colorPicker            =  array_values(array_diff( $colorPicker, array($bgColor) ));
-                    // Push all data in final result
-                    array_push($questionData_elt['data']['labels'], $choice);
-                    array_push($datasetsArray['data'] , $temp);
-                }
-                $datasetsArray['label']                     = 'Réponses enregistrées';
-                $datasetsArray['backgroundColor']           = $bgColor;
-                $datasetsArray['borderColor']               = $bgColor;
-                $datasetsArray['pointBackgroundColor']      = $bgColor;
-                $datasetsArray['pointHoverBorderColor']     = $bgColor;
-                $datasetsArray['pointBorderColor']          = $ptColor;
-                $datasetsArray['pointHoverBackgroundColor'] = $ptColor;
-                array_push($questionData_elt['data']['datasets'] , $datasetsArray);
-            }
-            array_push($questionData, $questionData_elt);
-        }
-        return $this->showResultPretty($questionData);
-    }
-
     // Function to save answer
     public function saveForm(Request $request){
         $result         = $request->all();
@@ -217,8 +78,12 @@ class APIController extends Controller
 
     // Function to get user response by unique link
     public function getUserResponse(String $link){
-        $answers = Answer::with(['questions','users'])->get()->where('users.link', $link)->toArray();
-        return $this->showResultPretty($answers);
+        $answers        = Answer::with(['questions','questions.options','questions.types','users'])->get()->where('users.link', $link)->toArray();
+        $userAnswer     = [];
+        foreach($answers as $key => $value){
+            array_push($userAnswer, $value);
+        }
+        return $this->showResultPretty($userAnswer);
     }
 
     // Function to check if user and password are OK
@@ -255,5 +120,161 @@ class APIController extends Controller
         $result                 = [];
         $result['emailList']    = $userMail;
         return $this->showResultPretty($result);
+    }
+
+    //-----------------------------------------------------------------//
+    //----------------------------- GRAPH -----------------------------//
+    //-----------------------------------------------------------------//
+    // Function to get pie chart data
+    public function getPieChartData_element($idQuestion){
+        /*
+        Model
+        const data               = [
+            labels: [
+                'Red',
+                'Blue',
+                'Yellow'
+            ],
+            datasets: [{
+                data: [300, 50, 100],
+                backgroundColor: [
+                '#FF6384',
+                '#36A2EB',
+                '#FFCE56'
+                ],
+                hoverBackgroundColor: [
+                '#FF6384',
+                '#36A2EB',
+                '#FFCE56'
+                ]
+            }]
+        ];
+        */
+        $questionInfo                   = Question::with(['types','options'])->where('id', $idQuestion)->get()->toArray();
+        $questionData_elt               = [];
+        foreach($questionInfo as $thisQuestion){
+            // Reinit color 
+            $colorPicker    = ['#003049','#d62828','#f77f00','#fcbf49','#eae2b7','#006d77','#ffb5a7','#78290f','#001f54'];
+            // Push title and id
+            $questionData_elt['title']              = $thisQuestion['title'];
+            $questionData_elt['id']                 = $idQuestion;
+            $questionData_elt['type']               = 'chart';
+            $questionData_elt['data']               = [];
+            /* Labels */
+            $questionData_elt['data']['labels']     = [];
+            /* Datasets */
+            $questionData_elt['data']['datasets']   = [];
+            $datasetsArray                          = [];
+            $datasetsArray['data']                  = [];
+            $datasetsArray['backgroundColor']       = [];
+            $datasetsArray['hoverBackgroundColor']  = [];
+            // Get options
+            $temp_choice                = json_decode ($thisQuestion['options']['content']);
+            foreach($temp_choice as $choice){
+                // Get count of each option by idQuestion
+                $temp                   = Answer::with(['questions'])->where([['content',$choice],['questions_id',$idQuestion]])->count();
+                // Choose color in array
+                $tempColor      = $colorPicker[rand(0,(sizeof($colorPicker)-1))];
+                // Delete color from colorPicker
+                $colorPicker =  array_values(array_diff( $colorPicker, array($tempColor) ));
+                // Push all data in final result
+                array_push($questionData_elt['data']['labels'], $choice);
+                array_push($datasetsArray['data'] , $temp);
+                array_push($datasetsArray['backgroundColor'] , $tempColor);
+                array_push($datasetsArray['hoverBackgroundColor'] , $tempColor);
+            }
+            array_push($questionData_elt['data']['datasets'] , $datasetsArray);
+        }
+        return $questionData_elt;
+    }
+
+    // Function to get radar chart data
+    public function getRadarChartData_element($idQuestion){
+        /*
+        Model
+        const data               = [
+            labels: [
+                'Red',
+                'Blue',
+                'Yellow'
+            ],
+            datasets: [{
+                label: 'My First dataset',
+                data: [65, 59, 90, 81, 56, 55, 40],
+                backgroundColor: 'rgba(179,181,198,0.2)',
+                borderColor: 'rgba(179,181,198,1)',
+                pointBackgroundColor: 'rgba(179,181,198,1)',
+                pointHoverBorderColor: 'rgba(179,181,198,1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+            }]
+        ];
+        */
+        // Get info of question
+        $questionInfo                       = Question::with(['types','options'])->where('id', $idQuestion)->get()->toArray();
+        $questionData_elt                   = [];
+        $colorPicker                        = ['#003049','#d62828','#f77f00','#fcbf49','#eae2b7','#006d77','#ffb5a7','#78290f','#001f54'];
+        foreach($questionInfo as $thisQuestion){
+            // Push title and id
+            $questionData_elt['title']                  = $thisQuestion['title'];
+            $questionData_elt['id']                     = $idQuestion;
+            $questionData_elt['type']                   = 'radar';
+            $questionData_elt['data']                   = [];
+            /* Labels */
+            $questionData_elt['data']['labels']         = [];
+            /* Datasets */
+            $questionData_elt['data']['datasets']       = [];
+            $datasetsArray                              = [];
+            $datasetsArray['data']                      = [];
+            // Get options
+            $temp_choice                = json_decode ($thisQuestion['options']['content']);
+            // Color
+            $bgColor                                    = '';
+            $ptColor                                    = '#fff';
+            foreach($temp_choice as $choice){
+                // Get count of each option by idQuestion
+                $temp                   = Answer::with(['questions'])->where([['content',$choice],['questions_id',$idQuestion]])->count();
+                // Choose color in array
+                $bgColor                = $colorPicker[rand(0,(sizeof($colorPicker)-1))];
+                // Delete color from colorPicker
+                $colorPicker            =  array_values(array_diff( $colorPicker, array($bgColor) ));
+                // Push all data in final result
+                array_push($questionData_elt['data']['labels'], $choice);
+                array_push($datasetsArray['data'] , $temp);
+            }
+            $datasetsArray['label']                     = 'Réponses enregistrées';
+            $datasetsArray['backgroundColor']           = $bgColor;
+            $datasetsArray['borderColor']               = $bgColor;
+            $datasetsArray['pointBackgroundColor']      = $bgColor;
+            $datasetsArray['pointHoverBorderColor']     = $bgColor;
+            $datasetsArray['pointBorderColor']          = $ptColor;
+            $datasetsArray['pointHoverBackgroundColor'] = $ptColor;
+            array_push($questionData_elt['data']['datasets'] , $datasetsArray);
+        }
+        return $questionData_elt;
+    }
+
+    // Function to get chart data
+    public function getChartData(Request $request){
+        /*
+            Model of array
+            $data = array(
+                array(
+                    'idQuestion'    => 5,
+                    'typeChart'     => 'radar',
+                ),
+                array(
+                    'idQuestion'    => 6,
+                    'typeChart'     => 'pie',
+                ),
+            );
+        */
+        $array          = $request->all();
+        $resultData     = [];
+        foreach($array as $element){
+            $itemData   = ($element['typeChart'] == 'radar') ? $this->getRadarChartData_element($element['idQuestion']) : ($element['typeChart'] == 'pie' ? $this->getPieChartData_element($element['idQuestion']) : null);
+            array_push($resultData, $itemData);
+        }
+        return $this->showResultPretty($resultData);
     }
 }

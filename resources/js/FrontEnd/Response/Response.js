@@ -1,43 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Redirect } from "react-router-dom";
+/* Question */
+import Question     from '../../components/Question/Question';
+/* Header */
+import Header       from '../Header/Header';
+/* Footer */
+import Footer       from '../Footer/Footer';
 
-const Response = (props) => {
-    const url_answer_list                   = '/listAnswers';
-    const [error,setError]                  = useState(null);
-    const [answerList, setAnswerList]       = useState([]);
+const Response = ({match}) => {
+    const userLink                              = match.params.uri;
+    const urlUserAnswer                         = '/userResponse/'+userLink;
+    const [error,setError]                      = useState(null);
+    const [answerQuestion, setAnswerQuestion]   = useState([]);
 
     useEffect(() => {
         axios
-        .get(url_answer_list)
+        .get(urlUserAnswer)
         .then(response => (
-            console.log(response.data),
-            setAnswerList(response.data)
+            setAnswerQuestion(response.data)
         ));
     }, [])
 
     return (
+        (answerQuestion.length==0) ? 
+        <Redirect to="/404"/>
+        :
         <div>
-            <h2>Liste des réponses</h2>
-            {answerList.map(answerChild => (
-                <table className="table table-dark">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Question</th>
-                            <th scope="col">Réponses</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        { answerChild.map(answer => (
-                        <tr key={answer.questions_id}>
-                            <th scope="row">{answer.questions_id}</th>
-                            <td>{answer.questions.title}</td>
-                            <td>{answer.content}</td>
-                        </tr>
-                        ))}
-                    </tbody>
-                </table> 
-            ))}
+            <Header/>
+            <div className="container formContainer">
+                <div className="row">
+                    <div className="col-sm">
+                        <h1 className="bigscreen_h1">Vos réponses</h1>
+                        <p>Les réponses enregistrées ne peuvent pas être modifiées.</p>
+                        <form className="needs-validation">
+                            {answerQuestion.map(ans => (
+                                <Question key={'question'+ans.questions.id} data={ans.questions}  nbQuestion={answerQuestion.length} answerUser={ans.content}/>
+                            ))}
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <Footer/>
         </div>
     );
 }
