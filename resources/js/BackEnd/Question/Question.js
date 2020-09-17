@@ -19,13 +19,13 @@ const Question = (props) => {
     }, [])
 
     return (
-        <div className="generalContainer">
-            <div className="row">
-                <div className="col-md-2 menuContainer">
+        <div className="container">
+            <div className="row admin_fullContainer">
+                <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 admin_menuContent">
                     <Menu/>
                 </div>
-                <div className="col-md-10 pageContainer">
-                    <h2 className="bsTitleH2">Liste des questions</h2>
+                <div className="col-xl-9 col-lg-9 col-md-12 col-sm-12 admin_mainContent">
+                    <h2 className="admin_h2">Liste des questions</h2>
                     <table className="table table-dark responsive">
                         <thead>
                             <tr>

@@ -20,13 +20,13 @@ const Responses = (props) => {
     }, [])
 
     return (
-        <div className="generalContainer">
-            <div className="row">
-                <div className="col-md-2 menuContainer">
+        <div className="container">
+            <div className="row admin_fullContainer rounded">
+                <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 admin_menuContent rounded">
                     <Menu/>
                 </div>
-                <div className="col-md-10 pageContainer">
-                    <h2 className="bsTitleH2">Liste des réponses</h2>
+                <div className="col-xl-9 col-lg-9 col-md-12 col-sm-12 admin_mainContent rounded">
+                    <h2 className="admin_h2">Liste des réponses</h2>
                     {answerList.map(answerChild => (
                         <table className="table table-dark" key={randomKey.generate(7)}>
                             <thead>
