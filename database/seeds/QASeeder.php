@@ -94,7 +94,7 @@ class QASeeder extends Seeder
                 dump($obj->answers);
                 // Check if option is saved in DB
                 $optionExist    = Option::where('content',$_toJson)->pluck('id')->first();
-                $test    = Option::where('title','Votre sexe')->pluck('content')->first();
+                $test    = Option::where('label','sexe')->pluck('content')->first();
                 dump($test);
                 dump("---------------------");
                 if($optionExist==null){
