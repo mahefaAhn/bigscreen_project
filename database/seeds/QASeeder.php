@@ -90,6 +90,7 @@ class QASeeder extends Seeder
             $question_insert->types()->associate($thisCategory);
             if(is_array($obj->answers)){
                 $_toJson        = json_encode($obj->answers);
+                dump($_toJson);
                 // Check if option is saved in DB
                 $optionExist    = Option::where('content',$_toJson)->pluck('id')->first();
                 if($optionExist==null){
@@ -99,6 +100,7 @@ class QASeeder extends Seeder
                     ));
                 }
                 $idThisOption   = Option::where('content',$_toJson)->pluck('id')->first();
+                dump()
                 // Associate question with option
                 $question_insert->options()->associate($idThisOption);
             }
