@@ -102,7 +102,7 @@ class QASeeder extends Seeder
                 $_req           = Option::where('content',$_toJson)->pluck('id')->first();
                 //$thisOption     = $_req[0];
                 // Associate question with option
-                $question_insert->options()->associate($thisOption);
+                $question_insert->options()->associate($_req);
             }
             $question_insert->save();
         }
