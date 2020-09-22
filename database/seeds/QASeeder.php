@@ -94,9 +94,9 @@ class QASeeder extends Seeder
                 $resultString   = "";
                 $sizeOfResult   = sizeof($obj->answers);
                 $countResult    = 1;
-                foreach($toArray as $arrayContent){
+                foreach($obj->answers as $answer){
                     $attach        = ($countResult!=$sizeOfResult) ? "," : "";
-                    $resultString .= $arrayContent.$attach;
+                    $resultString .= $answer.$attach;
                     $countResult++;
                 }
                 $resultString   = "[".$resultString."]";
