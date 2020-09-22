@@ -14,7 +14,7 @@ const Thanks = ({match}) => {
     const id            = match.params.uri;
     const urlRedirect   = '/response/'+id;
     const urlUserAnswer = '/userResponse/'+id;
-    const prod_url      = 'https://localhost:3000'+urlRedirect;
+    const prod_url      = `${window.location.protocol}//${window.location.host}/response/${id}`;
     const [hasResult, setHasResult]             = useState(false);
 
     useEffect(() => {
