@@ -100,17 +100,16 @@ class QASeeder extends Seeder
                     $countResult++;
                 }
                 $resultString   = "[".$resultString."]";
-                dump($resultString);
 
                 // Check if option is saved in DB
-                $optionExist    = Option::where('content',$toArray)->pluck('id')->first();
+                $optionExist    = Option::where('content',$resultString)->pluck('id')->first();
                 if($optionExist==null){
                     Option::create(array(
                         "label"       => 'new_option',
                         "content"     => $toArray,
                     ));
                 }
-                $idThisOption   = Option::where('content',$toArray)->pluck('id')->first();
+                $idThisOption   = Option::where('content',$resultString)->pluck('id')->first();
                 // Associate question with option
                 $question_insert->options()->associate($idThisOption);
             }
