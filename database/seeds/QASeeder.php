@@ -86,24 +86,21 @@ class QASeeder extends Seeder
                 "title"     => $obj->title,
                 "input_type"=> $obj->input_type,
             ));
-            $thisCategory = Type::where('name',$obj->category)->pluck('id')->toArray()[0];
+            $thisCategory = Type::where('name',$obj->category)->pluck('id')->first();
             $question_insert->types()->associate($thisCategory);
             if(is_array($obj->answers)){
-                $_toJson = json_encode($obj->answers);
+                $_toJson        = json_encode($obj->answers);
                 // Check if option is saved in DB
-                $_req           = Option::where('content',$_toJson)->pluck('id')->toArray();
-                $optionExist    = sizeof($_req);
-                if($optionExist==0){
+                $optionExist    = Option::where('content',$_toJson)->pluck('id')->first();
+                if($optionExist==null){
                     Option::create(array(
                         "label"       => 'new_option',
                         "content"     => $_toJson,
                     ));
                 }
-                $_req           = Option::where('content',$_toJson)->pluck('id')->toArray();
-                dump(Option::all());
-                $thisOption     = $_req[0];
+                $idThisOption   = Option::where('content',$_toJson)->pluck('id')->first();
                 // Associate question with option
-                $question_insert->options()->associate($thisOption);
+                $question_insert->options()->associate($idThisOption);
             }
             $question_insert->save();
         }

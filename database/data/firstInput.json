@@ -9,10 +9,7 @@
         "title"     : "Votre âge",
         "category"  : "B",
         "input_type": "text",
-        "answers"   : [
-            "Oui",
-            "Non"
-        ]
+        "answers"   : null
     },
     {
         "title"     : "Votre sexe",
