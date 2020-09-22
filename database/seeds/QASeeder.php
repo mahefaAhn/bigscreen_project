@@ -100,7 +100,6 @@ class QASeeder extends Seeder
                     ));
                 }
                 $idThisOption   = Option::where('content',$_toJson)->pluck('id')->first();
-                dump()
                 // Associate question with option
                 $question_insert->options()->associate($idThisOption);
             }
