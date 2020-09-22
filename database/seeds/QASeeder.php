@@ -99,8 +99,9 @@ class QASeeder extends Seeder
                         "content"     => $_toJson,
                     ));
                 }
-                $thisOption           = Option::where('content',$_toJson)->pluck('id')->first();
-                //$thisOption     = $_req[0];
+                $_req           = Option::where('content',$_toJson)->pluck('id')->toArray();
+                dump($_req);
+                $thisOption     = $_req[0];
                 // Associate question with option
                 $question_insert->options()->associate($thisOption);
             }
