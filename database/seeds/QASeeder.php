@@ -89,17 +89,28 @@ class QASeeder extends Seeder
             $thisCategory = Type::where('name',$obj->category)->pluck('id')->first();
             $question_insert->types()->associate($thisCategory);
             if(is_array($obj->answers)){
-                //$_toJson        = json_encode($obj->answers);
-                $_toJson        = ($obj->answers);
+                //Convert array to string
+                $toArray        = json_encode($obj->answers);
+                $resultString   = "";
+                $sizeOfResult   = sizeof($toArray);
+                $countResult    = 1;
+                foreach($toArray as $arrayContent){
+                    $attach        = ($countResult!=$sizeOfResult) ? "," : "";
+                    $resultString .= $arrayContent.$attach;
+                    $countResult++;
+                }
+                $resultString   = "[".$resultString."]";
+                dump($resultString);
+
                 // Check if option is saved in DB
-                $optionExist    = Option::where('content',$_toJson)->pluck('id')->first();
+                $optionExist    = Option::where('content',$toArray)->pluck('id')->first();
                 if($optionExist==null){
                     Option::create(array(
                         "label"       => 'new_option',
-                        "content"     => $_toJson,
+                        "content"     => $toArray,
                     ));
                 }
-                $idThisOption   = Option::where('content',$_toJson)->pluck('id')->first();
+                $idThisOption   = Option::where('content',$toArray)->pluck('id')->first();
                 // Associate question with option
                 $question_insert->options()->associate($idThisOption);
             }
