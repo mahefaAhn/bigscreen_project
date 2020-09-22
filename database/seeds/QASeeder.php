@@ -100,6 +100,7 @@ class QASeeder extends Seeder
                     $countResult++;
                 }
                 $resultString   = "[".$resultString."]";
+                dump(Option::where(['content',$resultString])->first());
 
                 // Check if option is saved in DB
                 $optionExist    = Option::where('content',$resultString)->pluck('id')->first();
