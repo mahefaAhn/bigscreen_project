@@ -92,7 +92,7 @@ class QASeeder extends Seeder
                 //Convert array to string
                 $toArray        = json_encode($obj->answers);
                 $resultString   = "";
-                $sizeOfResult   = sizeof($toArray);
+                $sizeOfResult   = sizeof($obj->answers);
                 $countResult    = 1;
                 foreach($toArray as $arrayContent){
                     $attach        = ($countResult!=$sizeOfResult) ? "," : "";
