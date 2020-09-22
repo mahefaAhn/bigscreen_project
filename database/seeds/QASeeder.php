@@ -89,30 +89,19 @@ class QASeeder extends Seeder
             $thisCategory = Type::where('name',$obj->category)->pluck('id')->first();
             $question_insert->types()->associate($thisCategory);
             if(is_array($obj->answers)){
-                //Convert array to string
-                $toArray        = json_encode($obj->answers);
-                $resultString   = "";
-                $sizeOfResult   = sizeof($obj->answers);
-                $countResult    = 1;
-                foreach($obj->answers as $answer){
-                    $attach        = ($countResult!=$sizeOfResult) ? "," : "";
-                    $resultString .= $answer.$attach;
-                    $countResult++;
-                }
-                $resultString   = "[".$resultString."]";
-                dump(Option::where(['content','=',$resultString])->first());
-
+                $_toJson = json_encode($obj->answers);
                 // Check if option is saved in DB
-                $optionExist    = Option::where('content',$resultString)->pluck('id')->first();
-                if($optionExist==null){
+                $_req           = Option::where('content',$_toJson)->pluck('id')->toArray();
+                $optionExist    = sizeof($_req);
+                if($optionExist==0){
                     Option::create(array(
                         "label"       => 'new_option',
-                        "content"     => $toArray,
+                        "content"     => $_toJson,
                     ));
                 }
-                $idThisOption   = Option::where('content',$resultString)->pluck('id')->first();
+                $thisOption           = Option::where('content',$_toJson)->pluck('id')->first();
                 // Associate question with option
-                $question_insert->options()->associate($idThisOption);
+                $question_insert->options()->associate($thisOption);
             }
             $question_insert->save();
         }
