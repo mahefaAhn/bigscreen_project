@@ -38,6 +38,7 @@ Route::get('admin/questions', 'BackController@questionList')->name('questions');
 Route::get('admin/answers', 'BackController@answerList')->name('answers');
 Route::get('userWhoAnswered', 'APIController@getUserWhoAnswered')->name('userWhoAnswered');
 Route::post('admin/chartData', 'APIController@getChartData')->name('chartData');
+Route::get('admin/getRadarChartData', 'APIController@getRadarChartData')->name('getRadarChartData');
 
 // Authentication
 Route::post('authentication', 'APIController@checkAuthentication')->name('authentication');

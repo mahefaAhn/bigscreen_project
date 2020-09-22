@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from "react-router-dom";
 import axios from 'axios';
 import LogoLight from '../../Assets/img/logo.png';
 // CSS
@@ -14,9 +15,11 @@ const Login = (props) => {
     const [buttonLoginStatus, setButtonLoginStatus] = useState('disabled');
 
     // Redirect to 'administration' if user is already logged in
-    const auth_token        = localStorage.getItem('token');
-    const auth_userLogged   = localStorage.getItem('userLogged');
+    const auth_token                                = localStorage.getItem('token');
+    const auth_userLogged                           = localStorage.getItem('userLogged');
     if(auth_token && auth_userLogged) props.history.push('/administration');
+
+    const [hasUser, setHasUser]                     = useState(auth_userLogged);
 
     const handleChange = (event) => {
         setErrorLogin(null);
@@ -43,9 +46,20 @@ const Login = (props) => {
         }
     };
 
+    const handleSuccessAuth = (data) => {
+        const token         = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        if(data.resultFound==1){
+            localStorage.setItem('token', token);
+            localStorage.setItem('userLogged', data.userFound);
+            setErrorLogin(null);
+            props.history.push('/administration');
+        }else{
+            setErrorLogin("Identifiant ou mot de passe incorrect.");
+        }
+    };
+
     const onSubmitFunction = (event) => {
         event.preventDefault();
-        const token         = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         const configAxios   = {
             headers: {
                 'Access-Control-Allow-Methods'  : 'POST, GET, OPTION',
@@ -62,15 +76,7 @@ const Login = (props) => {
             setErrorLogin(null);
             axios.post(urlAuthentication, userAuth)
             .then(function (response) {
-                const resultAuth    = response.data;
-                if(resultAuth.resultFound==1){
-                    localStorage.setItem('token', token);
-                    localStorage.setItem('userLogged', resultAuth.userFound);
-                    setErrorLogin(null);
-                    props.history.replace('/administration');
-                }else{
-                    setErrorLogin("Identifiant ou mot de passe incorrect.");
-                }
+                handleSuccessAuth(response.data);
             })
             .catch(function (error) {
                 console.log(error);
@@ -100,6 +106,7 @@ const Login = (props) => {
                 </form>
             </div>
         </div>
+        
     );
 }
 

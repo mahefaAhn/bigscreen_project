@@ -1,6 +1,9 @@
 .graphContainer{
     margin : 0;
 }
+.bsGraph{
+    margin-bottom: 20px;
+}
 
 @media (min-width: 300px) {
     .chartTitle{

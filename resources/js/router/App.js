@@ -24,7 +24,7 @@ import Login        from '../BackEnd/Login/Login';
 import LogOut       from '../BackEnd/LogOut/LogOut';
 
 // Standard
-import NotFoundPage from '../Standard/NotFoundPage/NotFoundPage';
+import Error404 from '../Standard/NotFoundPage/NotFoundPage';
 
 const App = () => {
     const auth_token        = localStorage.getItem('token');
@@ -47,8 +47,8 @@ const App = () => {
                 <ProtectedRoute path="/logOut" auth={loggedIn} component={LogOut}/>
                 
                 {/* 404 ERROR */}
-                <Route exact path="/404" component={NotFoundPage} />
-                <Route component={NotFoundPage} />
+                <Route exact path="/404" component={Error404} />
+                <Route component={Error404} />
             </Switch>
             </div>
         </BrowserRouter>

@@ -1,32 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 /* Header */
 import Header       from '../../FrontEnd/Header/Header';
 /* Footer */
 import Footer       from '../../FrontEnd/Footer/Footer';
 /* CSS */
 import './NotFoundPage.css';
+/* Not found page */
+import NotFoundPage from '../../components/NotFoundPage/NotFoundPage';
 
-const NotFoundPage = (props) => {
+const Error404 = (props) => {
     const prod_url = 'https://localhost:3000/';
     const uniqLink = '';
     return (
         <div className="notFoundPageContainer">
             <Header/>
-            <div className="container bodyNotFoundPageContainer">
-                <div className="row">
-                    <div className="col-sm bodyNotFoundPage">
-                        <h1 className="bigscreen_h1 font-weight-bold">Oups...</h1>
-                        <p className="centerSentence"> 
-                            La page que vous tentez de joindre n'est pas disponible.
-                        </p>
-                        <Link to="/"><button type="button" className="btn btn-outline-light">Retourner à la page d'accueil</button></Link>
-                    </div>
-                </div>
-            </div>
+            <NotFoundPage/>
             <Footer/>
         </div>
     );
 }
 
-export default NotFoundPage;
+export default Error404;

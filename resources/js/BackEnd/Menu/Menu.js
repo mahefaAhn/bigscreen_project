@@ -8,7 +8,7 @@ const Menu = (props) => {
     return (
         <div className="menuGroup">
             <ul className="userMenuList">
-                <li><img src={LogoLight} className="admin_imgLogo"/></li>
+                <li><Link to={'/administration'}><img src={LogoLight} className="admin_imgLogo"/></Link></li>
                 <li><Link className="menuTitle" to={'/administration'}>Accueil</Link></li>
                 <li><Link className="menuTitle"to={'/question'}>Questionnaire</Link></li>
                 <li><Link className="menuTitle"to={'/responses'}>Réponses</Link></li>
