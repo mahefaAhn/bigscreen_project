@@ -89,14 +89,10 @@ class QASeeder extends Seeder
             $thisCategory = Type::where('name',$obj->category)->pluck('id')->first();
             $question_insert->types()->associate($thisCategory);
             if(is_array($obj->answers)){
-                $_toJson        = json_encode($obj->answers);
-                dump($_toJson);
-                dump($obj->answers);
+                //$_toJson        = json_encode($obj->answers);
+                $_toJson        = ($obj->answers);
                 // Check if option is saved in DB
                 $optionExist    = Option::where('content',$_toJson)->pluck('id')->first();
-                $test    = Option::where('label','sexe')->pluck('content')->first();
-                dump($test);
-                dump("---------------------");
                 if($optionExist==null){
                     Option::create(array(
                         "label"       => 'new_option',
