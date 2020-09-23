@@ -27,26 +27,33 @@ const Responses = (props) => {
                 </div>
                 <div className="col-xl-9 col-lg-9 col-md-12 col-sm-12 admin_mainContent rounded">
                     <h2 className="admin_h2">Liste des réponses</h2>
-                    {answerList.map(answerChild => (
-                        <table className="table table-dark" key={randomKey.generate(7)}>
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Question</th>
-                                    <th scope="col">Réponses</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                { answerChild.map(answer => (
-                                <tr key={randomKey.generate(7)}>
-                                    <th scope="row">{answer.questions_id}</th>
-                                    <td>{answer.questions.title}</td>
-                                    <td>{answer.content}</td>
-                                </tr>
+                    {
+                        (answerList.length==0) ?
+                            <span className="noContent_txt text-dark">Aucune réponse à afficher</span>
+                        :
+                            <div>
+                                {answerList.map(answerChild => (
+                                    <table className="table table-dark" key={randomKey.generate(7)}>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Question</th>
+                                                <th scope="col">Réponses</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            { answerChild.map(answer => (
+                                            <tr key={randomKey.generate(7)}>
+                                                <th scope="row">{answer.questions_id}</th>
+                                                <td>{answer.questions.title}</td>
+                                                <td>{answer.content}</td>
+                                            </tr>
+                                            ))}
+                                        </tbody>
+                                    </table> 
                                 ))}
-                            </tbody>
-                        </table> 
-                    ))}
+                            </div>
+                    }
                 </div>
             </div>
         </div>

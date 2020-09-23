@@ -5,7 +5,7 @@ const LogOut = (props) => {
     localStorage.clear();
     return(
         <div>
-            <Redirect to="/login"/>
+            <Redirect to="/administration"/>
         </div>
     );
 }

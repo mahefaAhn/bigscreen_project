@@ -14,6 +14,10 @@ html, body{
 /* ------------------------------------------- */
 /* --------------- BACK OFFICE --------------- */
 /* ------------------------------------------- */
+.noContent_txt{
+    font-weight                 : bold ;
+    font-size                   : 13pt ;
+}
 
 .admin_h2{
     font-weight                 : bold ;
@@ -59,6 +63,7 @@ html, body{
 @media (min-width: 992px) {
     .admin_fullContainer{
         padding                 : 10px;
+        min-height              : 100vh;
     }
 
     .admin_menuContent{

@@ -305,6 +305,7 @@ class APIController extends Controller
         $questionData_elt['datasets']['data']       = [];
         /* Get count of user who answered survey */
         $userWhoAnswered                            = User::whereNotNull('link')->count();
+        if($userWhoAnswered == 0) $userWhoAnswered  = 1;
         /* Questions */
         $questions                                  = [11,12,13,14,15];
         foreach($questions as $idQuestion){

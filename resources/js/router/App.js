@@ -27,9 +27,6 @@ import LogOut       from '../BackEnd/LogOut/LogOut';
 import Error404 from '../Standard/NotFoundPage/NotFoundPage';
 
 const App = () => {
-    const auth_token        = localStorage.getItem('token');
-    const auth_userLogged   = localStorage.getItem('userLogged');
-    const loggedIn          = (auth_token!=null && auth_userLogged!=null);
     return (
         <BrowserRouter>
             <div>
@@ -39,12 +36,12 @@ const App = () => {
                 <Route exact path="/response/:uri" component={Response} />
                 <Route exact path="/answer/:uri" component={Thanks}/>
                 {/* BACK OFFICE */}
-                <Route exact path="/login" component={Login} />
+                <Route exact path="/administration" component={Login} />
 
-                <ProtectedRoute path="/administration" auth={loggedIn} component={Home}/>
-                <ProtectedRoute path="/responses" auth={loggedIn} component={Responses}/>
-                <ProtectedRoute path="/question" auth={loggedIn} component={Question}/>
-                <ProtectedRoute path="/logOut" auth={loggedIn} component={LogOut}/>
+                <ProtectedRoute path="/dashboard" component={Home}/>
+                <ProtectedRoute path="/responses" component={Responses}/>
+                <ProtectedRoute path="/question" component={Question}/>
+                <ProtectedRoute path="/logOut" component={LogOut}/>
                 
                 {/* 404 ERROR */}
                 <Route exact path="/404" component={Error404} />

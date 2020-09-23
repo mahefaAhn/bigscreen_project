@@ -49,7 +49,6 @@ const Home = (props) => {
         // Radar chart Data
         axios.get(urlRadarChart, configAxios)
         .then(function (response) {
-            console.log(response.data);
             setQuestionsRadar([...questionsRadar,response.data]);
         })
         .catch(function (error) {
@@ -68,12 +67,12 @@ const Home = (props) => {
                     <h2 className="admin_h2">Statistiques</h2>
                     <div className="row graphContainer">
                         {pieChartData.map(p => (
-                            <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12  bsGraph" key={p.id}>
+                            <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 bsGraph" key={p.id}>
                                 <p className="chartTitle font-weight-bold text-dark text-center">{p.title}</p>
-                                {(p.type=='chart') ? <Pie data={p.data} /> : ((p.type=='radar') ? <Radar data={p.data} /> : '')}
+                                {(p.type=='chart') ? <Pie data={p.data}/> : ((p.type=='radar') ? <Radar data={p.data} /> : '')}
                             </div>
                         ))}
-                        <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12  bsGraph">
+                        <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 bsGraph">
                             <p className="chartTitle font-weight-bold text-dark text-center">Qualités</p>
                             {questionsRadar.map( (content,index) => {
                                 return <Radar 

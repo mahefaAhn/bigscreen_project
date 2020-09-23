@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, Redirect } from "react-router-dom";
 
-const ProtectedRoute = ({ component: Component, auth, ...rest }) => (
+const ProtectedRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={(props) => (
-        auth === true
+        localStorage.getItem('token')
             ? <Component {...props} />
-            : <Redirect to='/login' />
+            : <Redirect to='/administration' />
     )} />
 )
 

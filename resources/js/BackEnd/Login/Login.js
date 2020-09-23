@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import axios from 'axios';
 import LogoLight from '../../Assets/img/logo.png';
 // CSS
@@ -7,6 +7,7 @@ import '../../CommonCSS/style.css'
 import './Login.css'
 
 const Login = (props) => {
+    const history                                   = useHistory();
     const urlAuthentication                         = '/authentication';
     const [errorEmail,setErrorEmail]                = useState(null);
     const [errorPwd,setErrorPwd]                    = useState(null);
@@ -15,11 +16,9 @@ const Login = (props) => {
     const [buttonLoginStatus, setButtonLoginStatus] = useState('disabled');
 
     // Redirect to 'administration' if user is already logged in
-    const auth_token                                = localStorage.getItem('token');
-    const auth_userLogged                           = localStorage.getItem('userLogged');
-    if(auth_token && auth_userLogged) props.history.push('/administration');
-
-    const [hasUser, setHasUser]                     = useState(auth_userLogged);
+    useEffect(() => {
+        if (localStorage.getItem("token") && localStorage.getItem("userLogged")) history.push('/dashboard');
+    },[]);
 
     const handleChange = (event) => {
         setErrorLogin(null);
@@ -46,18 +45,6 @@ const Login = (props) => {
         }
     };
 
-    const handleSuccessAuth = (data) => {
-        const token         = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        if(data.resultFound==1){
-            localStorage.setItem('token', token);
-            localStorage.setItem('userLogged', data.userFound);
-            setErrorLogin(null);
-            props.history.push('/administration');
-        }else{
-            setErrorLogin("Identifiant ou mot de passe incorrect.");
-        }
-    };
-
     const onSubmitFunction = (event) => {
         event.preventDefault();
         const configAxios   = {
@@ -69,14 +56,23 @@ const Login = (props) => {
 
         const email         =  document.querySelector('#email').value;
         const password      =  document.querySelector('#password').value;
+        const token         = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         if(email=='' && password==''){
             setErrorLogin("Veuillez renseigner l'adresse email et le mot de passe.");
         }
         else{
             setErrorLogin(null);
-            axios.post(urlAuthentication, userAuth)
+            axios.post(urlAuthentication, userAuth, configAxios)
             .then(function (response) {
-                handleSuccessAuth(response.data);
+                const resultData = response.data;
+                if(resultData.resultFound==1){
+                    localStorage.setItem('token', token);
+                    localStorage.setItem('userLogged', JSON.stringify(resultData.userFound));
+                    setErrorLogin(null);
+                    history.push('/dashboard');
+                }else{
+                    setErrorLogin("Identifiant ou mot de passe incorrect.");
+                }
             })
             .catch(function (error) {
                 console.log(error);
