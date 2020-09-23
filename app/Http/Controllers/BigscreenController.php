@@ -9,7 +9,7 @@ use App\Question;
 use App\Answer;
 use App\User;
 
-class APIController extends Controller
+class BigscreenController extends Controller
 {
     public function showResultPretty($data){
         return response()->json($data,200,[],JSON_PRETTY_PRINT);
