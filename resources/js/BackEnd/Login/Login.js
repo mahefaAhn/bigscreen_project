@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, useHistory } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import LogoLight from '../../Assets/img/logo.png';
 // CSS
@@ -96,8 +97,13 @@ const Login = (props) => {
                         <input type="password" className="form-control" id="password" name="password" onChange={handleChange} placeholder="Votre mot de passe"/>
                         {(errorPwd == null) ? '' : <label className="text-danger">{errorPwd}</label>}
                     </div>
-                    <div className="form-group float-right">
-                        <button type="submit" className={buttonLoginStatus+" btn btn-outline-light"}>Se connecter</button>
+                    <div className="form-group">
+                        <div className="float-left">
+                            <Link className="linkNoStyle text-white" to={'/'}>Revenir au questionnaire client</Link>
+                        </div>
+                        <div className="float-right">
+                            <button type="submit" className={buttonLoginStatus+" btn btn-outline-light"}>Se connecter</button>
+                        </div>
                     </div>
                 </form>
             </div>

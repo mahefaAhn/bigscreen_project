@@ -19,6 +19,10 @@ html, body{
     font-size                   : 13pt ;
 }
 
+.linkNoStyle{
+    text-decoration             : none ;
+}
+
 .admin_h2{
     font-weight                 : bold ;
     background                  : -webkit-linear-gradient(#75135d,#000000);
