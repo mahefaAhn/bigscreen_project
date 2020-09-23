@@ -79,11 +79,21 @@ class BigscreenController extends Controller
     // Function to get user response by unique link
     public function getUserResponse(String $link){
         $answers        = Answer::with(['questions','questions.options','questions.types','users'])->get()->where('users.link', $link)->toArray();
+        // User answers 
         $userAnswer     = [];
         foreach($answers as $key => $value){
             array_push($userAnswer, $value);
         }
-        return $this->showResultPretty($userAnswer);
+        // Date
+        $date_db        = Answer::with(['questions','questions.options','questions.types','users'])->get()->where('users.link', $link)->pluck('created_at')->first();
+        $dateAction     = date('d/m/Y', strtotime($date_db));
+        $timeAction     = date('H:i', strtotime($date_db));
+        // Result
+        $result                 = [];
+        $result['answers']      = $userAnswer;
+        $result['dateAction']   = $dateAction;
+        $result['timeAction']   = $timeAction;
+        return $this->showResultPretty($result);
     }
 
     // Function to check if user and password are OK
