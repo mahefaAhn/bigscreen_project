@@ -178,26 +178,20 @@
     },
     {
         "title"     : "Aimeriez vous pouvoir enregistrer des émissions TV pour pouvoir les regarder ultérieurement ?",
-        "category"  : "C",
-        "input_type": "numberSelect",
+        "category"  : "A",
+        "input_type": "textSelect",
         "answers"   : [
-            "1",
-            "2",
-            "3",
-            "4",
-            "5"
+            "Oui",
+            "Non"
         ]
     },
     {
         "title"     : "Aimeriez vous jouer à des jeux exclusifs sur votre Bigscreen ?",
-        "category"  : "C",
-        "input_type": "numberSelect",
+        "category"  : "A",
+        "input_type": "textSelect",
         "answers"   : [
-            "1",
-            "2",
-            "3",
-            "4",
-            "5"
+            "Oui",
+            "Non"
         ]
     },
     {
