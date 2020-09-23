@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Footer.css';
 import LogoLight from '../../Assets/img/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,7 +14,7 @@ const Footer = (props) => {
                 <div className="container-fluid text-center text-md-left">
                     <div className="row">
                         <div className="col-md-6 mt-md-0 mt-3">
-                            <img src={LogoLight} className="bsLogoMedium"/>
+                            <Link to={'/'}><img src={LogoLight} className="bsLogoMedium"/></Link>
                             <p>“Social VR Movie Theater”</p>
                         </div>
                         <hr className="clearfix w-100 d-md-none pb-3"/>

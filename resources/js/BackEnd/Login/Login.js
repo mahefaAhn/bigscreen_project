@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import LogoLight from '../../Assets/img/logo.png';
@@ -85,7 +85,7 @@ const Login = (props) => {
         <div className="row justify-content-center align-items-center">
             <div className="loginDivision rounded">
                 <form onSubmit={onSubmitFunction}>
-                    <center><img src={LogoLight} className="bsLogoLogin"/></center>
+                    <center><Link to={'/'}><img src={LogoLight} className="bsLogoLogin"/></Link></center>
                     <center>{(errorLoggin == null) ? '' : <label className="font-weight-bold text-white">{errorLoggin}</label>}</center>
                     <div className="form-group">
                         <label>Adresse email</label>
